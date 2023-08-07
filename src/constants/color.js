@@ -1,0 +1,1 @@
+export const colorPallete={green: "#1b5e20"};
