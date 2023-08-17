@@ -12,11 +12,13 @@ const RequirementForm = () => {
         <Grid container spacing={3} sx={{ mt: 2 }}>
           <Grid item xs={12}>
             <TextField
-              error={data.errorName}
+              error={!!data.errorName}
+              helperText={data.errorName}
               onChange={(e) =>
                 onChangeData({
                   ...data,
                   name: e.target.value,
+                  errorName:''
                 })
               }
               color="success"
@@ -30,11 +32,13 @@ const RequirementForm = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              error={data.errorContact}
+              error={!!data.errorContact}
+              helperText={data.errorContact}
               onChange={(e) =>
                 onChangeData({
                   ...data,
                   contactInfo: e.target.value,
+                  errorContact:''
                 })
               }
               color="success"
