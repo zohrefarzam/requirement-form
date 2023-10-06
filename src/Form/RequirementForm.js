@@ -1,11 +1,10 @@
 import { Grid, TextField } from "@mui/material";
-import React, { useContext, useState } from "react";
 import { RequirementFormContext } from "../context/RequirementFormContext";
-import CustomTextArea from "./CustomTextArea";
+import React,{ useContext } from "react";
 
 const RequirementForm = () => {
   const { onChangeData, data } = useContext(RequirementFormContext);
-  const [value, setValue] = useState("");
+
   return (
     <div>
       <React.Fragment>
@@ -18,7 +17,7 @@ const RequirementForm = () => {
                 onChangeData({
                   ...data,
                   name: e.target.value,
-                  errorName:''
+                  errorName: "",
                 })
               }
               color="success"
@@ -37,31 +36,14 @@ const RequirementForm = () => {
               onChange={(e) =>
                 onChangeData({
                   ...data,
-                  contactInfo: e.target.value,
-                  errorContact:''
+                  contactChannel: e.target.value,
                 })
               }
               color="success"
+              id="contactChannel"
+              name="contactChannel"
               required
-              id="contactInfo"
-              name="contactInfo"
               label="شماره تماس / ایمیل"
-              fullWidth
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              onChange={(e) =>
-                onChangeData({
-                  ...data,
-                  city: e.target.value,
-                })
-              }
-              color="success"
-              id="city"
-              name="city"
-              label="شهر / کشور"
               fullWidth
               autoComplete="shipping postal-code"
               variant="outlined"
@@ -72,12 +54,30 @@ const RequirementForm = () => {
               onChange={(e) =>
                 onChangeData({
                   ...data,
-                  requirement: e.target.value,
+                  address: e.target.value,
+                  errorContact: "",
                 })
               }
               color="success"
-              id="city"
-              name="city"
+              id="address"
+              name="address"
+              label="آدرس"
+              fullWidth
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              onChange={(e) =>
+                onChangeData({
+                  ...data,
+                  description: e.target.value,
+                })
+              }
+              color="success"
+              id="description"
+              name="description"
               label="نیازمندی"
               fullWidth
               autoComplete="shipping postal-code"

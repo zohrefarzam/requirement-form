@@ -3,9 +3,9 @@ import { createContext, useContext, useState } from "react";
 export const RequirementFormContext = createContext({
   data: {
     name: "",
-    contactInfo: "",
-    city: "",
-    requirement: "",
+    address: "",
+    contactChannel: "",
+    description: "",
     errorName:"",
     errorContact:''
   },

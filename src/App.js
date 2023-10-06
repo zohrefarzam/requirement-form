@@ -18,7 +18,7 @@ import RequirementFormContextProvider, {
   RequirementFormContext,
 } from "./context/RequirementFormContext";
 import Preview from "./Preview/Preview";
-import logo from './assets/images/logo.png';
+import logo from "./assets/images/logo.png";
 const steps = [
   "توضیحات",
   "انواع نیازمندی",
@@ -61,7 +61,7 @@ function getStepContent(step) {
     case 2:
       return (
         <Box sx={{ mt: 3 }}>
-          <p style={{ fontWeight: "bold" }}>
+          <p style={{ fontWeight: "bold" ,fontSize:18}}>
             {" "}
             مراحل ثبت درخواست و نیازمندی تون هم ساده هستش:
           </p>
@@ -95,15 +95,38 @@ function App() {
         });
         return;
       }
-      if (!data.contactInfo) {
+      if (!data.contactChannel) {
         onChangeData({
           ...data,
           errorContact: "لطفا شماره تماس یا ایمیل خود را وارد کنید",
         });
         return;
       }
+      delete data.errorContact
+      delete data.errorName
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "access-control-allow-origin" : "*",
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({ ...data }),
+      };
+      fetch("http://103.75.198.185:1080/book", requestOptions)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return response.json()
+      })
+        .then((data) => {
+          console.log(data);
+          if (data.ok) {
+          }
+        }).catch((e)=>console.log(e));
     }
-    setActiveStep(activeStep + 1);
+
+    if (activeStep !== 3) setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
@@ -118,14 +141,11 @@ function App() {
         elevation={0}
         sx={{
           position: "relative",
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+          background: "white",
         }}
       >
         <Toolbar>
           <img src={logo} height={80} width={80} />
-          {/* <Typography variant="h6" color="inherit" noWrap>
-            سلام
-          </Typography> */}
         </Toolbar>
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
